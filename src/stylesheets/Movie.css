@@ -3,3 +3,9 @@
     align-items: center;
     gap: 16px;
 }
+
+.movie-card:hover {
+  background-color: lightblue;
+  color: black;
+  cursor: pointer;
+}

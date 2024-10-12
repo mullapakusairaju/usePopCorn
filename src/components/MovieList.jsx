@@ -10,8 +10,8 @@ export default function MovieList({ movieList }) {
   console.log(toggle);
   return (
     <div className="container">
-      <div className="togglebtn d-flex justify-content-end ">
-        <button onClick={(e) => setToggle(!toggle)}>
+      <div className=" d-flex justify-content-end mt-2">
+        <button onClick={(e) => setToggle(!toggle)} className="togglebtn">
           {toggle ? <span>-</span> : <span>+</span>}
         </button>
       </div>
