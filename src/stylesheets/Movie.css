@@ -1,0 +1,5 @@
+.movie-card{
+    min-height: 72px;
+    align-items: center;
+    gap: 16px;
+}

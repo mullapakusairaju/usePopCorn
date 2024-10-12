@@ -1,0 +1,21 @@
+.nav-bar{
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+    align-items: center;
+    background-color: #6741d9;
+    min-height: 10vh;
+    border-radius: 16px;
+   margin : 0px 24px;
+}
+
+#nav-title{
+    display: grid;
+    
+}
+
+.search-box{
+    min-height: 52px;
+    background-color: #6741d9;
+    border-radius: 6px;
+    
+}

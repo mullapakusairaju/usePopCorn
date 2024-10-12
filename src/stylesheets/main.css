@@ -1,0 +1,17 @@
+.main-body{
+    
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    
+}
+
+.box{
+    display: flex;
+    min-width: 300px;
+    background-color: #343a40;
+    border: 1px solid  #212529;
+    border-radius: 12px;
+    height: 80vh;
+    
+}
