@@ -2,69 +2,55 @@ import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import MainBody from "./components/MainBody";
+import { useEffect } from "react";
+import { useState } from "react";
+
+const key = "c8e68cef";
+const Query = "interstellar";
 
 function App() {
-  const movieList = [
-    {
-      Id: 1,
-      Title: "DeadPool",
-      Date: "2020-09-12",
-      img: "https://thumbs.dreamstime.com/b/logo-deadpool-black-background-d-comic-hero-marvel-vector-illustration-144205291.jpg",
-    },
-    {
-      Id: 2,
-      Title: "365 Days",
-      Date: "2020-09-12",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTVYOpbpPYBKKLGmdib61vLeTkUenmlC_8m0MHSsOswXdnJ7a6fgQTLwQG9P0bwa0PL_8&usqp=CAU",
+  const [movieList, setMovieList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(
+    function () {
+      async function getMovies() {
+        try {
+          setIsLoading(true);
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=${key}&s=${Query}`
+          );
+
+          if (!res.ok) {
+            throw new Error("Failed to fetch data");
+          }
+          const data = await res.json();
+          if (data.Search) {
+            setMovieList(data.Search);
+          }
+        } catch (error) {
+          console.error(error);
+          setError(error.message);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+      getMovies();
     },
 
-    {
-      Id: 3,
-      Title: "Dilwale Dulhania Le Jayenge",
-      Date: "2020-09-12",
-      img: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p25126_p_v8_ac.jpg",
-    },
-    {
-      Id: 4,
-      Title: "DeadPool",
-      Date: "2020-09-12",
-      img: "https://thumbs.dreamstime.com/b/logo-deadpool-black-background-d-comic-hero-marvel-vector-illustration-144205291.jpg",
-    },
-    {
-      Id: 5,
-      Title: "365 Days",
-      Date: "2020-09-12",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTVYOpbpPYBKKLGmdib61vLeTkUenmlC_8m0MHSsOswXdnJ7a6fgQTLwQG9P0bwa0PL_8&usqp=CAU",
-    },
-
-    {
-      Id: 6,
-      Title: "Dilwale Dulhania Le Jayenge",
-      Date: "2020-09-12",
-      img: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p25126_p_v8_ac.jpg",
-    },
-
-    {
-      Id: 7,
-      Title: "365 Days",
-      Date: "2020-09-12",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTVYOpbpPYBKKLGmdib61vLeTkUenmlC_8m0MHSsOswXdnJ7a6fgQTLwQG9P0bwa0PL_8&usqp=CAU",
-    },
-
-    {
-      Id: 8,
-      Title: "Dilwale Dulhania Le Jayenge",
-      Date: "2020-09-12",
-      img: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p25126_p_v8_ac.jpg",
-    },
-  ];
+    []
+  );
 
   return (
     <div className="usepopcornApp">
       <Navbar movieList={movieList}></Navbar>
-      <MainBody movieList={movieList}></MainBody>
+      <MainBody
+        movieList={movieList}
+        isLoading={isLoading}
+        error={error}
+      ></MainBody>
     </div>
   );
 }
-
 export default App;

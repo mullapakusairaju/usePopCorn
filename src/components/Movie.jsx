@@ -6,11 +6,11 @@ export default function Movie({ movie }) {
   return (
     <div className="container mb-3 d-flex movie-card ">
       <div>
-        <img src={movie.img} alt={movie.Title} width={70} />
+        <img src={movie.Poster} alt={movie.Title} width={70} />
       </div>
       <div>
         <p className="m-0">{movie.Title}</p>
-        <span>{movie.Date}</span>
+        <span>🗓️ {movie.Year}</span>
       </div>
     </div>
   );

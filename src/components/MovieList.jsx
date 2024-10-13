@@ -19,7 +19,7 @@ export default function MovieList({ movieList }) {
         {toggle ? (
           <ul>
             {movieList.map((e) => (
-              <Movie movie={e} key={e.Id}></Movie>
+              <Movie movie={e} key={e.imdbID}></Movie>
             ))}
           </ul>
         ) : null}
